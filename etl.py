@@ -7,6 +7,17 @@ from pandas import DataFrame
 
 
 def process_song_file(cur, filepath):
+
+    """Process a single song file
+
+    Parameters:
+    cur :        Database cursor
+    filepath:    Song files repository path 
+
+    Returns:
+    None
+
+    """
     # open song file
     df = pd.read_json(filepath, lines=True)
     
@@ -28,6 +39,18 @@ def process_song_file(cur, filepath):
 
 
 def process_log_file(cur, filepath):
+
+    """Process a single log file 
+
+    Parameters:
+    cur :        Database cursor
+    filepath:    Log files repository path 
+
+    Returns:
+    None
+    
+    """
+
     # open log file
     df = pd.read_json(filepath, lines=True)
    
@@ -91,6 +114,20 @@ def process_log_file(cur, filepath):
 
 
 def process_data(cur, conn, filepath, func):
+
+    """Process log files 
+
+    Parameters:
+    cur :        Database cursor
+    conn :       Database connection
+    filepath:    Repository path
+    func:        Function 
+
+    Returns:
+    None
+    
+    """
+    
     # get all files matching extension from directory
     all_files = []
     for root, dirs, files in os.walk(filepath):
@@ -110,6 +147,9 @@ def process_data(cur, conn, filepath, func):
 
 
 def main():
+
+    """Main function"""
+
     conn = psycopg2.connect("host=127.0.0.1 dbname=sparkifydb user=student password=student")
     cur = conn.cursor()
 
